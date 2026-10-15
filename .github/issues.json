@@ -1,0 +1,89 @@
+[
+  {
+    "title": "Fix typos and unclear sentences in the Session 1 notes",
+    "labels": [
+      "good first issue",
+      "beginner",
+      "documentation"
+    ],
+    "body": "## Problem\nThe Session 1 notes may contain typos or sentences that a first-year student finds confusing.\n\n## Context\nBeginners judge the whole repo by Session 1.\n\n## Expected outcome\nA clearer `sessions/session-01/README.md` and `lesson.py` comments.\n\n## Relevant files\n`sessions/session-01/README.md`, `sessions/session-01/lesson.py`\n\n## Acceptance criteria\n- [ ] At least three improvements\n- [ ] `python start.py test` still passes\n\n## Difficulty\nbeginner"
+  },
+  {
+    "title": "Add a second made-up business to the Session 1 app",
+    "labels": [
+      "good first issue",
+      "beginner",
+      "feature"
+    ],
+    "body": "## Problem\nThe Session 1 app only shows a lemonade stall; students ask what break-even looks like for another small business.\n\n## Context\nSeeing the same idea in a second setting helps beginners see what is general.\n\n## Expected outcome\nA preset or a drawing mode for another made-up business (for example a bicycle repair stand) with its own sensible numbers.\n\n## Relevant files\n`sessions/session-01/app.html`\n\n## Acceptance criteria\n- [ ] The numbers are clearly marked as made up\n- [ ] No NaN or off-canvas drawing at the slider limits\n\n## Difficulty\nbeginner"
+  },
+  {
+    "title": "Add a colour-blind-safe palette to the live apps",
+    "labels": [
+      "beginner",
+      "documentation",
+      "feature"
+    ],
+    "body": "## Problem\nThe apps use red and green for loss and profit; some colour-blind users cannot tell them apart.\n\n## Context\nAccessibility is part of the quality checklist (QUALITY.md, item 9).\n\n## Expected outcome\nA palette or pattern (for example hatching) that stays distinguishable for common colour-blindness types, in light and dark mode.\n\n## Relevant files\n`sessions/session-02/app.html`, `sessions/session-03/app.html`\n\n## Acceptance criteria\n- [ ] Loss and profit distinguishable in grayscale\n- [ ] Screenshot added to the pull request\n\n## Difficulty\nbeginner"
+  },
+  {
+    "title": "Add Session 4: correlated price and demand",
+    "labels": [
+      "intermediate",
+      "feature"
+    ],
+    "body": "## Problem\nThe roadmap's first milestone does not exist yet.\n\n## Context\nSee `promo/roadmap.md`, Session 4. In Session 3 price, cost and demand are independent, but real customers buy less when prices are higher.\n\n## Expected outcome\n`sessions/session-04/` with README (sections A to F), lesson, checkpoint, exercises and app in the same style as Sessions 1 to 3.\n\n## Relevant files\n`promo/roadmap.md`, `sessions/session-03/lesson.py`\n\n## Acceptance criteria\n- [ ] Checkpoint prints PASS and the roadmap checkpoint is met\n- [ ] Added to the tests\n\n## Difficulty\nintermediate"
+  },
+  {
+    "title": "Add Session 5: seasons and a loan",
+    "labels": [
+      "intermediate",
+      "feature"
+    ],
+    "body": "## Problem\nSession 3 treats cash as the same every month and ignores borrowing.\n\n## Context\nRoadmap milestone 3; the openloan repo explains monthly instalments.\n\n## Expected outcome\nA lesson and app with a 12 month demand pattern and a loan, reporting the running total month by month.\n\n## Relevant files\n`sessions/session-03/lesson.py`, `promo/roadmap.md`\n\n## Acceptance criteria\n- [ ] Roadmap checkpoint is met\n- [ ] Checkpoint added\n\n## Difficulty\nintermediate"
+  },
+  {
+    "title": "Reproduce the Target: lines, histogram and tornado that move together",
+    "labels": [
+      "advanced",
+      "feature"
+    ],
+    "body": "## Problem\nThe Target animation shows three linked pictures reacting to the price and the fixed cost; there is no public implementation.\n\n## Context\nThe code behind the Target is private on purpose. The roadmap gives the path.\n\n## Expected outcome\nYour own implementation, written from the roadmap, plus an animation like the Target.\n\n## Relevant files\n`promo/roadmap.md`\n\n## Acceptance criteria\n- [ ] Lines, histogram and tornado all respond to the same sliders\n- [ ] Short write-up of your method\n\n## Difficulty\nadvanced"
+  },
+  {
+    "title": "Translate the Session 1 notes into Hindi",
+    "labels": [
+      "good first issue",
+      "beginner",
+      "documentation"
+    ],
+    "body": "## Problem\nStudents who prefer Hindi cannot read Session 1 comfortably.\n\n## Context\nThis project teaches first- and second-year students across India; translations widen who can join.\n\n## Expected outcome\n`sessions/session-01/README.hi.md` with a faithful Hindi translation of sections A to F, linked from the main README.\n\n## Relevant files\n`sessions/session-01/README.md`\n\n## Acceptance criteria\n- [ ] All sections translated\n- [ ] Equations, code blocks and file names unchanged\n- [ ] Link added to the main README\n\n## Difficulty\nbeginner"
+  },
+  {
+    "title": "Translate the Session 1 notes into Telugu",
+    "labels": [
+      "good first issue",
+      "beginner",
+      "documentation"
+    ],
+    "body": "## Problem\nStudents who prefer Telugu cannot read Session 1 comfortably.\n\n## Context\nThis project teaches first- and second-year students across India; translations widen who can join.\n\n## Expected outcome\n`sessions/session-01/README.te.md` with a faithful Telugu translation of sections A to F, linked from the main README.\n\n## Relevant files\n`sessions/session-01/README.md`\n\n## Acceptance criteria\n- [ ] All sections translated\n- [ ] Equations, code blocks and file names unchanged\n- [ ] Link added to the main README\n\n## Difficulty\nbeginner"
+  },
+  {
+    "title": "Translate the Session 1 notes into Tamil",
+    "labels": [
+      "good first issue",
+      "beginner",
+      "documentation"
+    ],
+    "body": "## Problem\nStudents who prefer Tamil cannot read Session 1 comfortably.\n\n## Context\nThis project teaches first- and second-year students across India; translations widen who can join.\n\n## Expected outcome\n`sessions/session-01/README.ta.md` with a faithful Tamil translation of sections A to F, linked from the main README.\n\n## Relevant files\n`sessions/session-01/README.md`\n\n## Acceptance criteria\n- [ ] All sections translated\n- [ ] Equations, code blocks and file names unchanged\n- [ ] Link added to the main README\n\n## Difficulty\nbeginner"
+  },
+  {
+    "title": "Translate the Session 1 notes into Malayalam",
+    "labels": [
+      "good first issue",
+      "beginner",
+      "documentation"
+    ],
+    "body": "## Problem\nStudents who prefer Malayalam cannot read Session 1 comfortably.\n\n## Context\nThis project teaches first- and second-year students across India; translations widen who can join.\n\n## Expected outcome\n`sessions/session-01/README.ma.md` with a faithful Malayalam translation of sections A to F, linked from the main README.\n\n## Relevant files\n`sessions/session-01/README.md`\n\n## Acceptance criteria\n- [ ] All sections translated\n- [ ] Equations, code blocks and file names unchanged\n- [ ] Link added to the main README\n\n## Difficulty\nbeginner"
+  }
+]
