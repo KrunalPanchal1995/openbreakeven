@@ -22,7 +22,7 @@
 You want to run a lemonade stall. Before you sell a single cup you must pay 60 dollars for the stall, a pitcher and a sign. After that each cup costs 50 cents to make and sells for 2 dollars. At the start you are 60 dollars behind. How many cups until your total income has caught up with your total cost? That number is the break-even point. (General education only: the stall is made up and this is not financial advice.)
 
 ## B. Concept and theory
-The fixed cost F is paid once, however many cups you sell. The variable cost v is paid for every cup. So the total cost after q cups is F + v q, a straight line that starts at F. The income is the price p times q, a straight line that starts at 0. Profit is income minus cost. Each cup earns p - v dollars towards paying off F, so the cups needed are F divided by what one cup earns. If p is not larger than v, a cup earns nothing and income never catches up: there is no break-even.
+The fixed cost F is paid once, however many cups you sell. The variable cost v is paid for every cup. So the total cost after q cups is F + v q, a straight line that starts at F. The income is the price p times q, a straight line that starts at 0. Profit is income minus cost. Each cup earns p - v dollars towards paying off F, so the cups needed are F divided by what one cup earns. If p is not larger than v, a cup earns nothing towards F (or even loses money) and income never catches up: there is no break-even.
 
 | Symbol | Meaning | Unit |
 |---|---|---|
@@ -71,7 +71,7 @@ Run the lesson (`python start.py 1`), then open the live app: [Session 1: the le
 
 **Answer.** Break-even is at 40 cups, where income and cost are both 80 dollars.
 
-**Experiment.** Run a real or pretend stall at school: write down what you spent first, then keep a tally of cups sold and the money taken. Plot the running totals and see where they cross. Expect the crossing to differ from 40 cups: some cups are spilt, the price may change, and the cost of a cup is only an average. The model uses one fixed price and cost and assumes every cup made is sold.
+**Experiment.** Run a real or pretend stall at school: write down what you spent first, then keep a tally of cups sold and the money taken. Plot the running totals and see where they cross, then compare it with the model's F / (p - v) for your own prices and costs. Expect some difference: some cups are spilt, the price may change, and the cost of a cup is only an average. The model uses one fixed price and cost and assumes every cup made is sold.
 
 ## F. Assessment and design challenge
 **Question type A: Conceptual.** A friend says: the stall costs 60 dollars and each cup sells for 2 dollars, so break-even is 60 / 2 = 30 cups. What did they forget?
@@ -89,6 +89,7 @@ Does a cup cost anything to make?
 They forgot the variable cost. Each cup brings in 2.00 dollars but also costs 0.50 dollars to make, so it only helps the fixed cost by 1.50 dollars. The right answer is 60 / 1.50 = 40 cups, not 30.
 
 </details>
+
 **Question type B: Numerical.** A different stall has fixed cost 45 dollars, price 1.50 dollars and a cup cost of 0.60 dollars. Find the break-even cups and check that income equals cost there.
 
 <details>
@@ -104,6 +105,7 @@ Earn per cup = price minus cup cost; then divide.
 Each cup earns 1.50 - 0.60 = 0.90 dollars. Cups = 45 / 0.90 = 50. Check: income = 1.50 * 50 = 75 dollars; cost = 45 + 0.60 * 50 = 75 dollars. Equal. Units: dollars divided by dollars per cup gives cups.
 
 </details>
+
 **Question type C: Graph and simulation interpretation.** On the graph of the first stall, read the cost, the income and the profit at 25 cups. Is the stall ahead or behind?
 
 <details>
@@ -119,6 +121,7 @@ Cost line value is 60 plus 0.50 times 25; income is 2.00 times 25.
 At 25 cups the cost is 60 + 12.50 = 72.50 dollars and the income is 50 dollars. The profit is 50 - 72.50 = minus 22.50 dollars, a loss: the red line is still above the green line, so the stall is behind.
 
 </details>
+
 **Question type D: Design and optimisation challenge.** Design: the stall will only be open for a short day. Change either the price or the fixed cost so that break-even is at 30 cups or fewer. Which would you pick and what is the risk?
 
 <details>
@@ -141,7 +144,7 @@ Score yourself with [RUBRIC.md](../../RUBRIC.md). Print the [activity sheet](act
 | Common misconception | What is actually true |
 |---|---|
 | Break-even is the number of cups that pay for the stall. | Each cup also costs something to make; only what is left, price minus cup cost, pays for the stall. |
-| At break-even the stall has made a profit. | At break-even the profit is exactly zero. Profit starts with the next cup. |
+| At break-even the stall has made a profit. | At break-even the profit is exactly zero. Profit becomes positive only from the 41st cup. |
 | A higher price always brings break-even sooner. | In this model yes, but real customers buy fewer cups at a higher price; Session 2 adds that. |
 | If I sell enough cups I will always break even. | Only if the price is above the cost of a cup. Otherwise every extra cup makes the loss bigger. |
 
