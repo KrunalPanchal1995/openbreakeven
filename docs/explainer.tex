@@ -10,7 +10,7 @@
 \setlength{\parindent}{0pt}
 \begin{document}
 
-\begin{center}{\LARGE\bfseries openbreakeven}\\[0.4em]{\large Find the break-even point of a small business, in three sessions.}\\[0.2em]\small PAN IIT OSS explainer \textbullet{} secondary school to diploma / undergraduate (levels 3-5)\end{center}
+\begin{center}{\LARGE\bfseries openbreakeven}\\[0.4em]{\large Find the break-even point of a small business, in four sessions.}\\[0.2em]\small PAN IIT OSS explainer \textbullet{} secondary school to diploma / undergraduate (levels 3-5)\end{center}
 
 \section*{Why this exists}
 Every small business pays some costs whether or not it sells anything, and earns a little on each sale. This explainer shows how to find the sales at which income catches up with cost, how safe that point is, and how uncertainty and time change the answer, using only straight lines, a little algebra and a random-number simulation.
@@ -18,11 +18,12 @@ Every small business pays some costs whether or not it sells anything, and earns
 \section*{The end goal}
 Find the break-even point of a small business. The end goal is to find the break-even point of a small business, and to know how far to trust it. The same ideas appear in pricing, planning a start-up and any decision where a fixed cost must be recovered. All examples are made up and this is general education, not financial advice.
 
-\section*{How the three sessions build up}
+\section*{How the four sessions build up}
 \begin{enumerate}[nosep]
 \item \textbf{Session 1: Where does income catch up with cost?} (Level 1, conceptual interactive model, 60 min).
 \item \textbf{Session 2: The break-even equations: contribution, safety and leverage} (Level 2, mathematical engineering model, 75 min).
 \item \textbf{Session 3: Break-even under mix, steps, uncertainty and time} (Level 3, simulation and validation, 90 min).
+\item \textbf{Session 4: When price and demand move together} (Level 3, simulation and validation, 90 min).
 \end{enumerate}
 
 \section{Session 1: Where does income catch up with cost?}
@@ -198,12 +199,75 @@ The bakery sells loaves (price 3.50, variable cost 1.40) and cakes (price 18, va
 \item \textbf{Design and optimisation challenge.} Design: the owner may choose the 600, 800 or 1000 loaf oven and a price from 3.00 to 5.00 dollars in 0.25 steps. A choice passes if the loss probability is at most 5 percent, the payback at most 12 months and the margin of safety at least 20 percent. Use \texttt{evaluate} to recommend one choice and explain the trade-off.
 \end{enumerate}
 
+\section{Session 4: When price and demand move together}
+
+\subsection*{A. Real-world problem}
+In Session 3 the made-up bakery's price, variable cost and demand were random but independent: a higher price than planned said nothing about demand. Real customers are not like that. When the price is above plan, fewer people buy; in a festival week a higher price can even come with more buyers. With the same averages and the same spreads, how much does this link change the chance that a month makes a loss? And which link should a lender believe? (Made-up bakery and numbers; general education only, not financial advice.)
+
+\subsection*{B. Concept and theory}
+The correlation rho of two random numbers is a number from -1 to +1. At -1 a high price always comes with low demand, at 0 there is no linear link and at +1 they always rise together. To draw demand with correlation rho to the price we mix two independent standard normal draws, z\_p for the price and z\_o for everything else: z\_d = rho z\_p + sqrt(1 - rho\textasciicircum{}2) z\_o, and then demand = mean + sd z\_d. The price and the variable cost are drawn exactly as in Session 3, so rho = 0 reproduces Session 3 to the last digit.
+
+Write profit = X D - F, where X = price - variable cost and D = demand. X and D are jointly normal, so the mean and the standard deviation of X D have exact formulas (Isserlis' theorem). With Cov(X, D) = rho sigma\_p sigma\_D (the cost is independent of both), the mean is mu\_X mu\_D + Cov - F, and the variance is mu\_X\textasciicircum{}2 sigma\_D\textasciicircum{}2 + mu\_D\textasciicircum{}2 sigma\_X\textasciicircum{}2 + 2 mu\_X mu\_D Cov + sigma\_X\textasciicircum{}2 sigma\_D\textasciicircum{}2 + Cov\textasciicircum{}2, with sigma\_X\textasciicircum{}2 = sigma\_p\textasciicircum{}2 + sigma\_v\textasciicircum{}2. The correlation moves the mean by only rho sigma\_p sigma\_D, which is 30 dollars per unit of rho here, but it moves the variance a lot.
+
+Why? A higher price earns more on each loaf but sells fewer loaves. With rho \textless{} 0 the two effects partly cancel (a \textbf{natural hedge}) and the profit varies less. With rho \textgreater{} 0 they add and the profit varies more. The risk of a loss month therefore depends on the links between the inputs, not only on the spread of each input.
+
+Which correlation is believable? Session 2 gave the demand line: each extra dollar of price loses 250 loaves a month. If the price wobbles by 0.20 dollars and demand follows that line, demand moves by 250 x 0.20 = 50 loaves, while the whole demand spread is 150 loaves, so the correlation is -50 / 150 = -0.33.
+
+\begin{itemize}[nosep]
+\item rho: correlation between price and demand (no unit)
+\item p, v, D: price, variable cost, demand (dollars per loaf, dollars per loaf, loaves per month)
+\item X: price minus variable cost (dollars per loaf)
+\item sigma\_p, sigma\_v, sigma\_D: standard deviations (0.20, 0.15, 150) (dollars per loaf, dollars per loaf, loaves per month)
+\item Cov: covariance of price and demand, rho sigma\_p sigma\_D (dollars x loaves per month)
+\item F: fixed cost (dollars per month)
+\end{itemize}
+
+\begin{equation*}
+z_d=\rho\,z_p+\sqrt{1-\rho^{2}}\,z_o,\qquad D=\mu_D+\sigma_D z_d
+\end{equation*}
+
+\begin{equation*}
+E[\text{profit}]=\mu_X\mu_D+\rho\,\sigma_p\sigma_D-F
+\end{equation*}
+
+\begin{equation*}
+\mathrm{Var}[X D]=\mu_X^{2}\sigma_D^{2}+\mu_D^{2}\sigma_X^{2}+2\mu_X\mu_D\,\mathrm{Cov}+\sigma_X^{2}\sigma_D^{2}+\mathrm{Cov}^{2},\qquad \mathrm{Cov}=\rho\,\sigma_p\sigma_D
+\end{equation*}
+
+\begin{equation*}
+\rho_{\text{implied}}=-\frac{b\,\sigma_p}{\sigma_D}=-\frac{250\times 0.20}{150}=-0.33
+\end{equation*}
+
+\begin{center}\includegraphics[width=0.95\linewidth]{figures/s04_price_demand_scatter.png}\\\small Price against demand for 1500 simulated months at correlation 0 and -0.5; the loss months are marked.\end{center}
+
+\begin{center}\includegraphics[width=0.95\linewidth]{figures/s04_loss_vs_rho.png}\\\small Left: profit histograms for correlation -0.5, 0 and +0.5. Right: the loss probability against the correlation.\end{center}
+
+\subsection*{E. Worked example}
+The bakery sells loaves at 3.50 dollars (variable cost 1.40), with F = 1200 dollars a month, a price wobble of 0.20, a cost wobble of 0.15 and demand of 800 loaves with sd 150. Find the mean and the standard deviation of monthly profit for correlation -0.5, estimate the loss probability from them, and compare with the simulation.
+\begin{enumerate}[nosep]
+\item mu\_X = 3.50 - 1.40 = 2.10, so the planned profit is 2.10 x 800 - 1200 = 480 dollars. Cov = -0.5 x 0.20 x 150 = -15.
+\item Mean = 480 - 15 = 465 dollars: the correlation moved the mean by only 15 dollars.
+\item sigma\_X\textasciicircum{}2 = 0.20\textasciicircum{}2 + 0.15\textasciicircum{}2 = 0.0625. Variance = 2.1\textasciicircum{}2 x 150\textasciicircum{}2 + 800\textasciicircum{}2 x 0.0625 + 2 x 2.1 x 800 x (-15) + 0.0625 x 150\textasciicircum{}2 + 15\textasciicircum{}2 = 99 225 + 40 000 - 50 400 + 1 406 + 225 = 90 456, so the standard deviation is 300.8 dollars (374.9 for independent inputs).
+\item A quick estimate treats the profit as normal: z = -465 / 300.8 = -1.546 and P(loss) = 0.061 (6.1 percent). The simulation of 20000 months gives 5.6 percent, with mean 461 and standard deviation 300.
+\item The normal shortcut is a little high because a product of normals is skewed: it has a longer tail on the profit side than on the loss side. For independent inputs the same shortcut gives 10.0 percent against 9.5 percent simulated.
+\end{enumerate}
+\textbf{Answer.} With correlation -0.5 the mean profit is 465 dollars and the standard deviation is 300.8 dollars (against 480 and 375 for independent inputs). The loss chance is about 6.1 percent by the normal shortcut and 5.6 percent by simulation, against 9.5 percent for independent inputs: a 3.9 point drop from a link that changes the mean by only 15 dollars.
+
+\subsection*{F. Questions}
+\begin{enumerate}[nosep]
+\item \textbf{Conceptual.} Why does a negative correlation between price and demand make the bakery's profit less risky, although it hardly changes the average profit?
+\item \textbf{Numerical.} Find the mean and the standard deviation of monthly profit for correlation +0.5 by hand (same data as the worked example), and use them to estimate the loss probability with the normal shortcut. How does it compare with the 12.4 percent of the simulation?
+\item \textbf{Graph and simulation interpretation.} In the loss-probability figure, the independent case (correlation 0) lies at 9.5 percent, above the lender's 8 percent, and the demand-line value (-0.33) lies below it. What can you conclude, and what can you not conclude?
+\item \textbf{Design and optimisation challenge.} Design: a lender asks for a loss probability of at most 5 percent. The owner can cut the fixed cost in steps of 50 dollars from 1200. (a) Assuming independent inputs, what is the highest fixed cost that meets the limit? (b) Assuming the demand-line correlation of -0.33? How much does believing the correlation relax the budget, and how safe is that answer?
+\end{enumerate}
+
 \section{Real-world mini-project}
 \textbf{Choose the price and the oven size for a made-up bakery.} The owner may buy a 600, 800 or 1000 loaf oven (\texttt{OPTIONS} in the Session 3 lesson gives the monthly fixed cost and the start-up cost of each) and may set any price from 3.00 to 5.00 dollars in steps of 0.25. Demand is 1675 minus 250 times the price (loaves per month) and sales cannot exceed the oven's capacity. Use \texttt{evaluate} from Session 3 to report, for every choice, the break-even quantity, the margin of safety, the loss probability and the payback in months. A choice passes if the loss probability is at most 5 percent, the payback is at most 12 months and the margin of safety is at least 20 percent. Among the passing choices, recommend the one with the highest mean monthly profit. General education only: the numbers are made up.
 
+\textbf{The lender's limit on the loss chance.} A lender will fund the bakery if the chance that a month makes a loss is at most 8 percent. The independent model of Session 3 says 9.5 percent, so the plan fails; but price and demand are linked. Use \texttt{loss\_vs\_rho}, \texttt{rho\_for\_limit} and \texttt{implied\_rho} from Session 4 to find which correlations meet the limit, whether the demand line of Session 2 does, and how robust that conclusion is to the seed and to the spread of the price. State clearly that the answer depends on the correlation you assume, and which assumption you would defend to the lender. \textbf{Deliverable:} A script that prints the loss probability for correlations from -0.9 to +0.9 in steps of 0.1, finds the largest correlation that meets the 8 percent limit, reports the correlation implied by the demand line and its loss probability, repeats the calculation for seeds 1 to 5, and saves a plot of the loss probability against the correlation with the limit and the implied value marked. \textbf{Success looks like:} The largest correlation that meets the limit is about -0.19 (loss probability 7.9 percent); the demand line gives -0.33 and a loss probability of 6.9 percent, so it meets the limit, while independent inputs (9.5 percent) and positive correlations (12.4 percent at +0.5) do not; the threshold stays between about -0.20 and -0.14 across seeds 1 to 5.
+
 \section{The path ahead}
 \begin{enumerate}[nosep]
-\item \textbf{Session 4: Price and demand move together.} A second simulation in which price and demand are negatively correlated (a higher price goes with lower demand).
 \item \textbf{Session 5: Shares of the variance.} A function that reports, for price, variable cost and demand, the share of profit variance it explains.
 \item \textbf{Session 6: Seasons and a loan.} A 12 month demand pattern with a December peak and a loan repaid in equal monthly instalments.
 \item \textbf{Session 7: Design under a risk limit.} A search that adds new oven options and prices, and reports the cheapest design that meets the limit.
@@ -234,6 +298,14 @@ The bakery sells loaves (price 3.50, variable cost 1.40) and cakes (price 18, va
 \item \textbf{Numerical.} Hint: Monthly rate = 1.12\textasciicircum{}(1/12) - 1. Add up discounted cash month by month and compare with 6000. Solution: Simple payback: 6000 / 480 = 12.5 months, so the running total first reaches zero in month 13. The monthly rate is 0.9489 percent. Discounted payback is month 14. The 24 month NPV is 4259 dollars (5520 dollars with no discounting). Discounting lowers the value of later cash, so the discounted payback is later and the NPV smaller. Units: dollars and months.
 \item \textbf{Graph and simulation interpretation.} Hint: Look at the area left of the zero line, and at how the width changes. Solution: The loss probability is the share of the area (about 9.5 percent of the 20000 months) to the left of zero, the red part. A larger demand standard deviation widens the histogram. The mean profit stays near 480 dollars (the simulated mean is 476) but more months fall below zero, so the loss probability rises.
 \item \textbf{Design and optimisation challenge.} Hint: Loop over capacity and price, print loss, payback and mean profit, and filter with \texttt{passes}. Solution: Only the 600 loaf oven at 4.00 and 4.25 dollars passes. The best of them for profit is 4.25 dollars: break-even about 351 loaves, average sales about 546, margin of safety about 36 percent, loss probability about 4 percent, mean profit about 556 dollars a month and payback 9 months. A price of 3.50 fails because the payback is 21 months, and the 1000 loaf oven does not pay back within 36 months at 4.00 dollars because demand is below its capacity most months, so its extra fixed cost is wasted. Trade-off: the biggest oven looks safest for growth but has the highest fixed cost; the small oven loses some sales when demand is high.
+\end{enumerate}
+
+\subsection*{Session 4}
+\begin{enumerate}[nosep]
+\item \textbf{Conceptual.} Hint: Think about what a month with a higher price than planned does to the margin and to the number of loaves sold. Solution: Profit is the margin per loaf times the number of loaves. A month with a high price has a bigger margin but, with a negative correlation, a smaller demand; a month with a low price has a smaller margin but a bigger demand. The two effects pull the profit in opposite directions and partly cancel, so the profit varies less around the same centre: this is a natural hedge. The average moves only by rho sigma\_p sigma\_D (here 15 dollars at -0.5) while the standard deviation falls from 375 to 301 dollars, so fewer months fall below zero. With a positive correlation the effects add and the risk grows.
+\item \textbf{Numerical.} Hint: Cov = rho sigma\_p sigma\_D = 15. Use the variance formula and then z = -mean / standard deviation. Solution: Mean = 480 + 15 = 495 dollars. Variance = 99 225 + 40 000 + 2 x 2.1 x 800 x 15 + 1 406 + 225 = 99 225 + 40 000 + 50 400 + 1 406 + 225 = 191 256, so the standard deviation is 437.3 dollars. z = -495 / 437.3 = -1.132 and P(loss) = 0.129, about 12.9 percent, a little above the simulated 12.4 percent. The shortcut is slightly high at both +0.5 and -0.5 because of the skew. Units: dollars per month, and a pure number for the probability.
+\item \textbf{Graph and simulation interpretation.} Hint: Where does the curve cross 8 percent, and what does the demand-line value assume about why price moves? Solution: The curve crosses 8 percent at a correlation of about -0.19, so any correlation below that meets the limit. The demand line implies -0.33, which meets it with 6.9 percent. What we cannot conclude is that the plan is safe: the -0.33 holds only if the price wobbles because the bakery moves along its demand line, so that 50 of the 150 loaves of demand spread are explained by price. If the price wobbles for other reasons (a supplier's cost, a competitor's sale) the link may be weaker, and at a correlation of 0 the limit is missed. The result depends on an assumption about the cause of the price changes and should be reported as a range (6.9 to 9.5 percent), not as one number.
+\item \textbf{Design and optimisation challenge.} Hint: Use \texttt{loss\_probability(rho, fixed=...)} for F = 1200, 1150, 1100, 1050 and 1000. Solution: Independent inputs: 1200 gives 9.5 percent, 1150 gives 7.0, 1100 gives 5.1 (just over) and 1050 gives 3.6, so the highest fixed cost that meets the limit is 1050 dollars. With the correlation -0.33: 1200 gives 6.9 percent, 1150 gives 4.9 and 1100 gives 3.5, so the highest is 1150 dollars. Believing the correlation relaxes the budget by 100 dollars a month. But 4.9 percent is only 0.1 points below the limit, within the error of the simulation (about 0.2 points for 20000 months), and it rests on the assumed correlation; a careful owner who cannot rule out independent inputs would choose 1050 dollars, which meets the limit under both assumptions (3.6 and 2.4 percent). The constants are made-up, so this shows a method, not a real loan decision.
 \end{enumerate}
 
 \section{How to join}

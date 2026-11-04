@@ -2,16 +2,6 @@
 
 This is the path, not the code. Each milestone says what you learn, what you build, and how you know it works. Pick one and open a pull request. See [CONTRIBUTING.md](../CONTRIBUTING.md).
 
-## Session 4: Price and demand move together
-
-**You will learn:** Correlation between random inputs, and how it changes the spread of profit.
-
-**You will build:** A second simulation in which price and demand are negatively correlated (a higher price goes with lower demand).
-
-**Checkpoint (not met by the shipped code):** With correlation -0.5 between price and demand, the loss probability differs from the independent value by at least 2 percentage points (the shipped independent model gives 9.5 percent).
-
-**Difficulty:** intermediate
-
 ## Session 5: Shares of the variance
 
 **You will learn:** Variance-based sensitivity: how much of the spread of profit each input explains, not only a one-at-a-time swing.
