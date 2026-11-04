@@ -57,7 +57,7 @@ The first figure draws both lines against cups sold. The red cost line starts at
 *Profit after each cup: it starts at minus 60 dollars and gains 1.50 dollars per cup.*
 
 ## D. Interactive simulation
-Run the lesson (`python start.py 1`), then open the live app: [Session 1: the lemonade stall](https://krunalpanchal1995.github.io/openbreakeven/session-01/) (or `app.html` in this folder). Move the cups slider and watch the two bars: money out and money in. Then open the graph view and change the price, the cost of a cup and the fixed cost one at a time.
+Run the lesson (`python start.py 1`), then open the live app: [Session 1: the lemonade stall](https://krunalpanchal1995.github.io/openbreakeven/session-01/) (or `app.html` in this folder). Move the cups slider and watch the two bars: money out and money in. Then open the graph view and change the price, the cost of a cup and the fixed cost one at a time. Press **Bicycle repair stand** to see the same idea for a second business: a repair sells for 12 dollars, costs 4 dollars in parts and time, and the tools cost 400 dollars, so break-even is 400 / (12 - 4) = 50 repairs. Both businesses and all their numbers are made up.
 
 **Challenge.** Make the stall break even within 30 cups.
 

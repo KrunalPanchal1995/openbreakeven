@@ -32,7 +32,8 @@
 <body>
 <main>
   <h1>Session 1: the lemonade stall</h1>
-  <p class="sub">Money out and money in; the graph shows where the lines meet.</p>
+  <p class="sub">Money out and money in; the graph shows where the lines meet. Both businesses and all their numbers are made up.</p>
+  <div class="bar" id="biz" role="group" aria-label="Choose a business"></div>
   <div class="bar" id="graphs" role="group" aria-label="Choose a graph"></div>
   <div class="scroll"><canvas id="c" width="720" height="420" role="img" aria-label="Session 1: the lemonade stall: interactive plot"></canvas></div>
   <div class="bar" id="presets" role="group" aria-label="Presets"></div>
@@ -47,11 +48,11 @@
 <script>
 "use strict";
 const PARAMS = [{"id": "price", "label": "Price of a cup", "min": 0.5, "max": 4, "step": 0.1, "value": 2, "unit": "dollars"}, {"id": "vc", "label": "Cost of making a cup", "min": 0.1, "max": 2, "step": 0.1, "value": 0.5, "unit": "dollars"}, {"id": "fixed", "label": "Fixed cost", "min": 10, "max": 150, "step": 5, "value": 60, "unit": "dollars"}, {"id": "cups", "label": "Cups sold", "min": 0, "max": 120, "step": 1, "value": 25, "unit": "cups"}];
-const GRAPHS = [{"id": "stall", "label": "Money out and money in", "diagram": true}, {"id": "lines", "label": "Cost and income against cups"}];
-const PRESETS = [{"label": "The stall", "values": {"price": 2, "vc": 0.5, "fixed": 60, "cups": 25}}, {"label": "Cheap lemonade", "values": {"price": 1, "vc": 0.5, "fixed": 60, "cups": 25}}, {"label": "Price = cost", "values": {"price": 0.5, "vc": 0.5, "fixed": 60, "cups": 25}}];
+const GRAPHS = [{"id": "stall", "label": "Money out and money in", "diagram": true}, {"id": "lines", "label": "Cost and income against sales"}];
+const PRESETS = [{"label": "The stall", "values": {"price": 2, "vc": 0.5, "fixed": 60, "cups": 25}, "biz": 0}, {"label": "Cheap lemonade", "values": {"price": 1, "vc": 0.5, "fixed": 60, "cups": 25}, "biz": 0}, {"label": "Price = cost", "values": {"price": 0.5, "vc": 0.5, "fixed": 60, "cups": 25}, "biz": 0}, {"label": "Repair stand", "biz": 1, "values": {"price": 12, "vc": 4, "fixed": 400, "cups": 30}}, {"label": "Repair stand, busy day", "biz": 1, "values": {"price": 12, "vc": 4, "fixed": 400, "cups": 90}}, {"label": "Repair stand, price = cost", "biz": 1, "values": {"price": 4, "vc": 4, "fixed": 400, "cups": 30}}];
 const CHALLENGE = "Make the stall break even within 30 cups.";
 const CHALLENGE_SOLUTION = {"price": 2, "vc": 0.5, "fixed": 45, "cups": 25};
-const challengeTest = CHALLENGE ? (p) => (p.price > p.vc && p.fixed / (p.price - p.vc) <= 30.0001) : null;
+const challengeTest = CHALLENGE ? (p) => (biz === 0 && p.price > p.vc && p.fixed / (p.price - p.vc) <= 30.0001) : null;
 const cv = document.getElementById("c"), ctx = cv.getContext("2d");
 const W = cv.width, H = cv.height, p = {};
 let graph = GRAPHS.length ? GRAPHS[0].id : "main";
@@ -102,26 +103,26 @@ function draw() {
   ctx.clearRect(0, 0, W, H);
   const C = { fg: css("--fg"), muted: css("--muted"), accent: css("--accent"), line: css("--line"), good: css("--good"), bad: css("--bad") };
   
-const cups = p.cups, cost = p.fixed + p.vc * cups, inc = p.price * cups, prof = inc - cost;
+const B = BIZ[biz], cups = p.cups, cost = p.fixed + p.vc * cups, inc = p.price * cups, prof = inc - cost;
 const earn = p.price - p.vc, be = earn > 0 ? p.fixed / earn : null;
 if (graph === "stall") {
   const mx = Math.max(cost, inc, 1), S = 560 / mx, x0 = 80;
   ctx.font = "13px system-ui"; ctx.textAlign = "left"; ctx.fillStyle = C.fg;
-  ctx.fillText("Money out: what the stall has cost so far", x0, 70);
+  ctx.fillText("Money out: what the " + B.noun + " has cost so far", x0, 70);
   ctx.fillStyle = C.bad; ctx.globalAlpha = 0.9; ctx.fillRect(x0, 80, S * p.fixed, 40);
   ctx.globalAlpha = 0.45; ctx.fillRect(x0 + S * p.fixed, 80, S * p.vc * cups, 40); ctx.globalAlpha = 1;
-  ctx.fillStyle = C.fg; ctx.fillText("Money in: what the cups have earned", x0, 175);
+  ctx.fillStyle = C.fg; ctx.fillText("Money in: what the " + B.many + " have earned", x0, 175);
   ctx.fillStyle = C.good; ctx.fillRect(x0, 185, S * inc, 40);
   ctx.fillStyle = C.muted; ctx.font = "12px system-ui";
-  ctx.fillText("dark red: fixed cost (paid before the first cup); light red: cost of the cups", x0, 140);
+  ctx.fillText("dark red: fixed cost (paid before the first " + B.one + "); light red: cost of the " + B.many + "", x0, 140);
   ctx.fillText("bars share one scale; the longer bar is ahead", x0, 245);
   ctx.font = "16px system-ui"; ctx.fillStyle = prof >= 0 ? C.good : C.bad;
   ctx.fillText(prof >= 0 ? "Caught up: profit $" + prof.toFixed(2) : "Not yet: loss $" + (-prof).toFixed(2), x0, 300);
   ctx.font = "12px system-ui"; ctx.fillStyle = C.muted;
-  ctx.fillText(be === null ? "Each cup earns nothing, so income never catches up." : "Break-even is at " + be.toFixed(1) + " cups; you have sold " + cups + ".", x0, 330);
+  ctx.fillText(be === null ? "Each " + B.one + " earns nothing, so income never catches up." : "Break-even is at " + be.toFixed(1) + " " + B.many + "; you have " + (biz ? "done " : "sold ") + cups + ".", x0, 330);
 } else {
   const top = Math.max(p.fixed + p.vc * 120, p.price * 120) * 1.05;
-  const A = axes({ x: [0, 120], y: [0, top], xl: "cups sold (cups)", yl: "money (dollars)", title: "Income catches up with cost" }, C);
+  const A = axes({ x: [0, 120], y: [0, top], xl: B.many + (biz ? " done (" : " sold (") + B.many + ")", yl: "money (dollars)", title: "Income catches up with cost" }, C);
   curve(c => p.fixed + p.vc * c, A, C.bad, 0, 120);
   curve(c => p.price * c, A, C.good, 0, 120);
   if (be !== null && be <= 120) dot(A, be, p.price * be, C.fg, "break-even");
@@ -129,10 +130,10 @@ if (graph === "stall") {
   ctx.font = "12px system-ui"; ctx.textAlign = "left"; ctx.fillStyle = C.bad; ctx.fillText("red: total cost", A.L + 10, A.T + 16);
   ctx.fillStyle = C.good; ctx.fillText("orange: income", A.L + 10, A.T + 32);
 }
-readout("cost $" + cost.toFixed(2) + " &nbsp; income $" + inc.toFixed(2) + " &nbsp; " + (prof >= 0 ? "profit $" + prof.toFixed(2) : "loss $" + (-prof).toFixed(2)) + " &nbsp;|&nbsp; each cup earns $" + earn.toFixed(2) + " &nbsp; " + (be === null ? "no break-even: the price does not cover the cost of a cup" : "break-even = " + be.toFixed(1) + " cups"));
+readout("cost $" + cost.toFixed(2) + " &nbsp; income $" + inc.toFixed(2) + " &nbsp; " + (prof >= 0 ? "profit $" + prof.toFixed(2) : "loss $" + (-prof).toFixed(2)) + " &nbsp;|&nbsp; each " + B.one + " earns $" + earn.toFixed(2) + " &nbsp; " + (be === null ? "no break-even: the price does not cover the cost of a " + B.one + "" : "break-even = " + be.toFixed(1) + " " + B.many));
 
   const ch = document.getElementById("challenge");
-  if (challengeTest) { const ok = !!challengeTest(p); ch.hidden = false; ch.dataset.ok = String(ok);
+  if (challengeTest) { const ok = !!challengeTest(p); ch.hidden = biz !== 0; ch.dataset.ok = String(ok);
     ch.innerHTML = "<b>Challenge:</b> " + CHALLENGE + " &nbsp; " + (ok ? "<b>Done!</b>" : "Not yet.");
     if (ok !== lastOk) { document.getElementById("status").textContent = ok ? "Challenge done." : "Challenge not yet done."; lastOk = ok; } }
 }
@@ -150,8 +151,34 @@ for (const q of PARAMS) {
   box.appendChild(row);
 }
 function setAll(vals) { for (const k in vals) { p[k] = vals[k]; if (inputs[k]) { inputs[k][0].value = vals[k]; inputs[k][1].textContent = vals[k]; } } draw(); }
+// ---- two made-up businesses: words and slider ranges change, the model does not ----
+const BIZ = [
+  { title: "the lemonade stall", noun: "stall", one: "cup", many: "cups",
+    labels: { price: "Price of a cup", vc: "Cost of making a cup", fixed: "Fixed cost", cups: "Cups sold" },
+    range: { price: [0.5, 4, 0.1, 2], vc: [0.1, 2, 0.1, 0.5], fixed: [10, 150, 5, 60], cups: [0, 120, 1, 25] } },
+  { title: "the bicycle repair stand", noun: "stand", one: "repair", many: "repairs",
+    labels: { price: "Price of a repair", vc: "Cost of one repair (parts and time)", fixed: "Fixed cost (tools and stand)", cups: "Repairs done" },
+    range: { price: [5, 40, 1, 12], vc: [1, 20, 1, 4], fixed: [100, 1000, 50, 400], cups: [0, 120, 1, 30] } }
+];
+let biz = 0;
+function applyBiz(i) {
+  biz = i; const B = BIZ[i];
+  for (const id in B.range) {
+    const [mn, mx, st, v] = B.range[id], inp = inputs[id][0];
+    inp.min = mn; inp.max = mx; inp.step = st; inp.value = v; p[id] = v; inputs[id][1].textContent = v;
+    document.querySelector('label[for="' + id + '"]').textContent = B.labels[id] + " (" + (id === "cups" ? B.many : "dollars") + ")";
+  }
+  document.querySelector("main h1").textContent = "Session 1: " + B.title;
+  for (const b of document.querySelectorAll("#biz button")) b.setAttribute("aria-pressed", String(+b.dataset.biz === i));
+}
 const DEFAULTS = Object.assign({}, p);
-document.getElementById("reset").addEventListener("click", () => setAll(DEFAULTS));
+document.getElementById("reset").addEventListener("click", () => { applyBiz(0); setAll(DEFAULTS); });
+for (const [i, b0] of BIZ.entries()) {
+  const b = document.createElement("button"); b.type = "button"; b.textContent = b0.title.replace("the ", "").replace(/^./, c => c.toUpperCase()); b.dataset.biz = String(i);
+  b.setAttribute("aria-pressed", String(i === 0));
+  b.addEventListener("click", () => { applyBiz(i); draw(); });
+  document.getElementById("biz").appendChild(b);
+}
 for (const g of GRAPHS) {
   const b = document.createElement("button"); b.type = "button"; b.textContent = g.label;
   b.setAttribute("aria-pressed", String(g.id === graph));
@@ -160,7 +187,7 @@ for (const g of GRAPHS) {
 }
 for (const pr of PRESETS) {
   const b = document.createElement("button"); b.type = "button"; b.textContent = pr.label;
-  b.addEventListener("click", () => setAll(pr.values));
+  b.addEventListener("click", () => { if (pr.biz !== undefined && pr.biz !== biz) applyBiz(pr.biz); setAll(pr.values); });
   document.getElementById("presets").appendChild(b);
 }
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
