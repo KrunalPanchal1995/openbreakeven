@@ -2,14 +2,14 @@
 
 [![Checks](https://github.com/KrunalPanchal1995/openbreakeven/actions/workflows/ci.yml/badge.svg)](https://github.com/KrunalPanchal1995/openbreakeven/actions/workflows/ci.yml) ![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square) ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue?style=flat-square) [![Open in Colab](https://img.shields.io/badge/Colab-session%201-F9AB00?style=flat-square&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/KrunalPanchal1995/openbreakeven/blob/main/sessions/session-01/lesson.ipynb) [![Live apps](https://img.shields.io/badge/live-apps-1f6feb?style=flat-square)](https://krunalpanchal1995.github.io/openbreakeven/)
 
-**Find the break-even point of a small business, in four sessions.**
+**Find the break-even point of a small business, in five sessions.**
 
 openbreakeven teaches how a small business finds the sales it needs to cover its costs, from a lemonade stall to risk, sensitivity and payback, using only Python and a browser.
 
 - **Start from a lemonade stall.** Session 1 needs only school arithmetic: a cost line, an income line, and where they meet.
 - **See it move.** Every session ships a slider app that runs in the browser, with labelled graphs.
 - **Know you got it right.** Each session ends with a checkpoint that prints PASS or FAIL against hand calculations and numerical scans.
-- **Build the missing half.** The repo stops at Session 4 on purpose; the roadmap shows the path to the Target.
+- **Build the missing half.** The repo stops at Session 5 on purpose; the roadmap shows the path to the Target.
 
 [Target](#the-target) · [Who is this for](#who-is-this-for) · [Quick start](#quick-start) · [Sessions](#sessions) · [Roadmap](#roadmap) · [Contribute](#contribute) · [Explainer PDF](docs/explainer.pdf)
 
@@ -62,7 +62,7 @@ cd openbreakeven
 python start.py 1
 ```
 
-`start.py` creates a private environment, installs what is needed and runs Session 1 with its checkpoint. Next: `python start.py 2`, `python start.py 3`, `python start.py 4`, or `python start.py test` to check everything. Only a checkpoint: `python start.py check 1`.
+`start.py` creates a private environment, installs what is needed and runs Session 1 with its checkpoint. Next: `python start.py 2`, `python start.py 3`, `python start.py 4`, `python start.py 5`, or `python start.py test` to check everything. Only a checkpoint: `python start.py check 1`.
 
 Four lines turn the idea of Session 1 into a result (they work as they are): Save it as `try.py` and run it with `python start.py run try.py` (this uses the private environment, where NumPy is installed):
 
@@ -84,6 +84,7 @@ Every session also opens in your browser with sliders (no install): [live apps](
 | 2 | [The break-even equations: contribution, safety and leverage](sessions/session-02/README.md) | Level 2: mathematical engineering model | 75 min | [open](https://krunalpanchal1995.github.io/openbreakeven/session-02/) |
 | 3 | [Break-even under mix, steps, uncertainty and time](sessions/session-03/README.md) | Level 3: simulation and validation | 90 min | [open](https://krunalpanchal1995.github.io/openbreakeven/session-03/) |
 | 4 | [When price and demand move together](sessions/session-04/README.md) | Level 3: simulation and validation | 90 min | [open](https://krunalpanchal1995.github.io/openbreakeven/session-04/) |
+| 5 | [Seasons and a loan](sessions/session-05/README.md) | Level 3: simulation and validation | 90 min | [open](https://krunalpanchal1995.github.io/openbreakeven/session-05/) |
 
 Each session follows the same six steps: A real-world problem, B concept and theory, C visual explanation, D interactive simulation, E worked example and experiment, F assessment and design challenge. Each ends with `checkpoint.py`, which prints `PASS` or `FAIL` against reference numbers. Session 3 also contains the real-world mini-project: **Choose the price and the oven size for a made-up bakery**, and Session 4 the mini-project **The lender's limit on the loss chance**.
 
@@ -95,14 +96,15 @@ flowchart LR
   S2[Session 2<br/>The break-even equations: contribution, safety and leverage]
   S3[Session 3<br/>Break-even under mix, steps, uncertainty and time]
   S4[Session 4<br/>When price and demand move together]
-  R[Roadmap S5+<br/>YOU build this]
+  S5[Session 5<br/>Seasons and a loan]
+  R[Roadmap S6+<br/>YOU build this]
   T((Target))
-  S1 --> S2 --> S3 --> S4 --> R --> T
+  S1 --> S2 --> S3 --> S4 --> S5 --> R --> T
 ```
 
 | Folder or file | What is inside |
 |---|---|
-| `sessions/` | four sessions: README (A-F), `lesson.py`, notebook, live app, exercises, activity sheet, checkpoint |
+| `sessions/` | five sessions: README (A-F), `lesson.py`, notebook, live app, exercises, activity sheet, checkpoint |
 | `promo/` | the Target: media, live links, and the roadmap (path only) |
 | `docs/` | `explainer.tex` and the built `explainer.pdf` |
 | `tests/` | runs every lesson and checkpoint headless |
@@ -114,8 +116,7 @@ flowchart LR
 
 | Milestone | What you will build | Difficulty |
 |---|---|---|
-| Session 5: Shares of the variance | A function that reports, for price, variable cost and demand, the share of profit variance it explains. | advanced |
-| Session 6: Seasons and a loan | A 12 month demand pattern with a December peak and a loan repaid in equal monthly instalments. | intermediate |
+| Session 6: Shares of the variance | A function that reports, for price, variable cost and demand, the share of profit variance it explains. | advanced |
 | Session 7: Design under a risk limit | A search that adds new oven options and prices, and reports the cheapest design that meets the limit. | advanced |
 | Session 8: A browser lab with live Monte Carlo | One page with sliders for price, costs, fixed cost and demand, linked to the lines, histogram and tornado chart. | advanced |
 

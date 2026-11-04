@@ -2,7 +2,7 @@
 
 This is the path, not the code. Each milestone says what you learn, what you build, and how you know it works. Pick one and open a pull request. See [CONTRIBUTING.md](../CONTRIBUTING.md).
 
-## Session 5: Shares of the variance
+## Session 6: Shares of the variance
 
 **You will learn:** Variance-based sensitivity: how much of the spread of profit each input explains, not only a one-at-a-time swing.
 
@@ -11,16 +11,6 @@ This is the path, not the code. Each milestone says what you learn, what you bui
 **Checkpoint (not met by the shipped code):** The shares add up to 1 within 0.05 (the shipped tornado gives swings in dollars, not shares).
 
 **Difficulty:** advanced
-
-## Session 6: Seasons and a loan
-
-**You will learn:** Monthly cash flows that are not constant, and borrowing part of the start-up cost (see openloan).
-
-**You will build:** A 12 month demand pattern with a December peak and a loan repaid in equal monthly instalments.
-
-**Checkpoint (not met by the shipped code):** The twelve monthly profits add up to within 1 percent of twelve times the flat monthly profit when the pattern averages 1.0, and the model reports a month-by-month running total (the shipped model uses constant cash).
-
-**Difficulty:** intermediate
 
 ## Session 7: Design under a risk limit
 
